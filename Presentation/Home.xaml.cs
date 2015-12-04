@@ -530,8 +530,7 @@ namespace Captura
                 ImgProvider = new ScreenProvider((SelectedVideoSource as ScreenVSLI).Screen,
                                                     IncludeCursorLambda,
                                                     VideoSettings.CaptureClicks,
-                                                    VideoSettings.CaptureKeystrokes,
-                                                    ConvertColor(VideoSettings.BackgroundColor));
+                                                    VideoSettings.CaptureKeystrokes);
 
             else if (SelectedVideoSourceKind == VideoSourceKind.WebCam)
                 ImgProvider = (SelectedVideoSource as WebCamVSLI).ToWebCamProvider();

@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
-using Microsoft.Windows.Shell;
 
 namespace Captura
 {
@@ -21,10 +20,6 @@ namespace Captura
             Show();
             RegSelhWnd = (HwndSource)HwndSource.FromVisual(this);
             Hide();
-
-            var Chrome = new WindowChrome() { ResizeBorderThickness = new Thickness(3) };
-
-            WindowChrome.SetWindowChrome(this, Chrome);
         }
 
         public IntPtr Handle { get { return RegSelhWnd.Handle; } }

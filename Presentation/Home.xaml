@@ -17,9 +17,9 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom">
             <Label x:Name="TimeManager" 
-                       Content="00:00" 
-                       Foreground="White"
-                       DockPanel.Dock="Right"/>
+                   Content="00:00" 
+                   Foreground="White"
+                   DockPanel.Dock="Right"/>
             <Label Content="Ready"
                    Name="Status"/>
         </DockPanel>
@@ -36,6 +36,7 @@
                    VerticalContentAlignment="Center"
                    MouseUp="OpenOutputFolder"/>
             <TextBox x:Name="OutPath" 
+                     Foreground="{StaticResource Accent}"
                      IsReadOnly="True" 
                      Text="{Binding Source={StaticResource Settings}, Path=Default.OutputPath, Mode=TwoWay}"/>
         </DockPanel>
@@ -93,6 +94,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="CONFIGURE"
+                           Foreground="{StaticResource Accent}"
                            Style="{StaticResource Heading2}"
                            Margin="0,0,0,8" />
                 <mui:ModernButton IconHeight="17"
