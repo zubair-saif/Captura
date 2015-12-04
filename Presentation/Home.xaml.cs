@@ -431,7 +431,7 @@ namespace Captura
 
                 AvailableAudioSources.Add(new KeyValuePair<string, string>("-1", "[No Sound]"));
 
-                foreach (var Dev in NAudioFacade.EnumerateAudioDevices())
+                foreach (var Dev in AudioProvider.EnumerateAudioDevices())
                     AvailableAudioSources.Add(Dev);
 
                 SelectedAudioSourceId = "-1";
@@ -492,10 +492,10 @@ namespace Captura
 
             int AudioBitRate = App.IsLamePresent ? SharpAviEncoder.AudioQualityToBitRate(AudioSettings.AudioQuality) : 0;
 
-            NAudioFacade AudioSource = null;
+            AudioProvider AudioSource = null;
 
-            if (SelectedAudioSourceId != "-1")
-                AudioSource = new NAudioFacade(SelectedAudioSourceId,
+            if (SelectedAudioSourceId != "-1" && SelectedVideoSourceKind != VideoSourceKind.NoVideo)
+                AudioSource = new AudioProvider(SelectedAudioSourceId,
                     AudioSettings.Stereo,
                     AudioSettings.EncodeAudio,
                     AudioBitRate,
@@ -549,21 +549,22 @@ namespace Captura
 
                 else VideoEncoder = new GifWriter(lastFileName, 1000 / VideoSettings.FrameRate,
                     GifSettings.GifRepeat ? GifSettings.GifRepeatCount : -1);
-
-                if (AudioSource != null) AudioSource.CreateWaveWriter(
-                    Path.ChangeExtension(lastFileName,
-                    AudioSource.EncodeMp3 && !AudioSource.IsLoopback ? ".mp3" : ".wav"));
             }
 
             else if (SelectedVideoSourceKind != VideoSourceKind.NoVideo)
                 VideoEncoder = new SharpAviEncoder(lastFileName, Encoder,
                     VideoSettings.VideoQuality, VideoSettings.FrameRate,
                     AudioSource, ImgProvider);
-
-            else AudioSource.CreateWaveWriter(lastFileName);
             #endregion
 
-            if (Recorder == null) Recorder = new Recorder(VideoEncoder, ImgProvider, AudioSource);
+            if (Recorder == null) 
+                Recorder = SelectedVideoSourceKind == VideoSourceKind.NoVideo
+                    ? (IRecorder)new AudioAloneRecorder(SelectedAudioSourceId,
+                                                        lastFileName,
+                                                        AudioSettings.Stereo,
+                                                        AudioSettings.EncodeAudio,
+                                                        AudioBitRate)
+                    : new Recorder(VideoEncoder, ImgProvider, AudioSource);
 
             Recorder.Error += (E) => Dispatcher.Invoke(new Action(() =>
                 {
