@@ -52,9 +52,8 @@
       <HintPath>..\#Binaries\.Net 4.5\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ScreenWorks, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ScreenWorks\bin\Debug\ScreenWorks.dll</HintPath>
+    <Reference Include="ScreenWorks">
+      <HintPath>..\#Binaries\ScreenWorks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />

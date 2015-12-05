@@ -38,22 +38,9 @@ namespace Captura
         }
 
         public Bitmap Capture()
-        {
-            bool IsCursor = IncludeCursor();
-
-            var BMP = new Bitmap(Width, Height);
-
-            using (var g = Graphics.FromImage(BMP))
-            {
-                g.CopyFromScreen(Rectangle.Location, Point.Empty, Rectangle.Size, CopyPixelOperation.SourceCopy);
-
-                if (IsCursor) g.DrawCursor();
-
-                if (MouseKeyHookFacade != null) MouseKeyHookFacade.Draw(g, Rectangle.Location);
-
-                g.Flush();
-            }
-
+        {                        
+            var BMP = ScreenShot.Capture(Rectangle, IncludeCursor());
+            if (MouseKeyHookFacade != null) MouseKeyHookFacade.Draw(BMP, Rectangle.Location);
             return BMP;
         }
 
@@ -68,7 +55,7 @@ namespace Captura
         public void Dispose()
         {
             RegSel.ResizeMode = ResizeMode.CanResize;
-            MouseKeyHookFacade.Dispose();
+            if (MouseKeyHookFacade != null) MouseKeyHookFacade.Dispose();
         }
     }
 }

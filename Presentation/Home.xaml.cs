@@ -512,7 +512,7 @@ namespace Captura
             {
                 var Src = SelectedVideoSource as WindowVSLI;
 
-                if (Src.Handle == RegionSelector.Handle)
+                if (Src.Handle == RegionSelector.Handle && VideoSettings.StaticRegionCapture)
                 {
                     ImgProvider = new StaticRegionProvider(RegionSelector,
                         IncludeCursorLambda,
