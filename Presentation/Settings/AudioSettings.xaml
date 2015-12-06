@@ -5,10 +5,25 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI">
     <Grid>
         <ScrollViewer>
-            <StackPanel MinWidth="150">
+            <StackPanel MinWidth="150"
+                        Margin="10">
                 <TextBlock Text="AUDIO"
                                Style="{StaticResource Heading2}"
                                Margin="0,8,0,8" />
+
+                <DockPanel>
+                    <TextBlock Text="Audio Source:"
+                           VerticalAlignment="Center" 
+                           Margin="0,0,16,4" />
+                    <ComboBox VerticalAlignment="Center" 
+                          Margin="0,0,0,4"
+                          ItemsSource="{Binding _AvailableAudioSources}"
+                          SelectedValue="{Binding _SelectedAudioSourceId, Mode=TwoWay}"
+                          SelectedValuePath="Key"
+                          Name="AudioSourcesBox"
+                          DisplayMemberPath="Value"
+                          SelectionChanged="AudioVideoSelectionChanged"/>
+                </DockPanel>
 
                 <CheckBox Name="EncodeMp3Box" 
                               Margin="0,5"

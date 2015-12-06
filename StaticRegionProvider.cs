@@ -32,7 +32,7 @@ namespace Captura
         {
             get
             {
-                var Location = (Point)RegSel.Dispatcher.Invoke(new Func<Point>(() => new Point((int)RegSel.Left, (int)RegSel.Top)));
+                var Location = RegSel.Dispatcher.Invoke<Point>(() => new Point((int)RegSel.Left, (int)RegSel.Top));
                 return new Rectangle(Location.X, Location.Y, Width, Height);
             }
         }

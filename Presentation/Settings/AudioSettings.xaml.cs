@@ -1,12 +1,14 @@
-﻿using System.ComponentModel;
+﻿using ScreenWorks;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Controls;
-using ScreenWorks;
 
 namespace Captura
 {
     public partial class AudioSettings : UserControl, INotifyPropertyChanged
     {
-        static AudioSettings Instance;
+        public static AudioSettings Instance;
 
         #region Init
         static AudioSettings()
@@ -17,10 +19,14 @@ namespace Captura
                 MaxAudioQuality = SharpAviEncoder.LameSupportedBitRatesCount - 1;
                 AudioQuality = SharpAviEncoder.LameSupportedBitRatesCount / 2;
             }
+
+            AvailableAudioSources = new ObservableCollection<KeyValuePair<string, string>>();
         }
 
         public AudioSettings()
         {
+            _AvailableAudioSources = AvailableAudioSources;
+
             InitializeComponent();
 
             DataContext = this;
@@ -33,9 +39,49 @@ namespace Captura
                 AudioQualitySlider.IsEnabled = false;
                 EncodeMp3Box.IsEnabled = false;
             }
+                        
+            RefreshAudioSources();
+
+            AudioSourcesBox.SelectedIndex = 0;
         }
         #endregion
-                
+
+        void AudioVideoSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            VideoSettings.Instance.CheckFunctionalityAvailability();
+        }
+
+        public static ObservableCollection<KeyValuePair<string, string>> AvailableAudioSources { get; private set; }
+
+        public ObservableCollection<KeyValuePair<string, string>> _AvailableAudioSources { get; private set; }
+
+        public static string SelectedAudioSourceId = "-1";
+
+        public static void RefreshAudioSources()
+        {
+            AvailableAudioSources.Clear();
+
+            AvailableAudioSources.Add(new KeyValuePair<string, string>("-1", "[No Sound]"));
+            
+            foreach (var Dev in AudioProvider.EnumerateAudioDevices())
+                AvailableAudioSources.Add(Dev);
+
+            if (Instance != null) Instance.AudioSourcesBox.SelectedIndex = 0;
+        }
+
+        public string _SelectedAudioSourceId
+        {
+            get { return SelectedAudioSourceId; }
+            set
+            {
+                if (SelectedAudioSourceId != value)
+                {
+                    SelectedAudioSourceId = value;
+                    OnPropertyChanged("_SelectedAudioSourceId");
+                }
+            }
+        }
+
         #region Audio
         static readonly int MaxAudioQuality = 0;
 
@@ -84,7 +130,7 @@ namespace Captura
             }
         }
         #endregion
-        
+
         #region INotifyPropertyChanged
         void OnPropertyChanged(string e)
         {

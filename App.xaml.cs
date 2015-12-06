@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Captura.Properties;
+using ScreenWorks;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using Captura.Properties;
-using FirstFloor.ModernUI.Presentation;
-using ScreenWorks;
 
 namespace Captura
 {
     public partial class App : Application
     {
         public static bool IsLamePresent { get; private set; }
-        
+
         public static bool IsDirectShowPresent { get; private set; }
 
         string Dir = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
@@ -19,14 +18,13 @@ namespace Captura
         void Application_Startup(object sender, StartupEventArgs e)
         {
             #region Settings
-            AppearanceManager.Current.ThemeSource = Settings.Default.MUITheme == "light" ?
-                AppearanceSettings.LightTheme.Source : AppearanceSettings.DarkTheme.Source;
+            AppearanceManager.AccentColor = Settings.Default.MUIThemeColor;
 
-            AppearanceManager.Current.AccentColor = Settings.Default.MUIThemeColor;
+            OtherSettings.MinimizeOnStart = Settings.Default.MinimizeOnStart;
 
-            VideoSettings.MinimizeOnStart = Settings.Default.MinimizeOnStart;
+            OtherSettings.IncludeCursor = Settings.Default.IncludeCursor;
             #endregion
-
+            
             string LamePath = Path.Combine(Dir, string.Format("lameenc{0}.dll", Environment.Is64BitProcess ? "64" : "32"));
 
             if (!File.Exists(LamePath)) IsLamePresent = false;
@@ -38,6 +36,7 @@ namespace Captura
 
             IsDirectShowPresent = File.Exists(Path.Combine(Dir, "DirectShowLib-2005.dll"));
 
+#if !DEBUG
             App.Current.DispatcherUnhandledException += (s, args) =>
             {
                 MessageBox.Show(args.Exception.Message);
@@ -57,17 +56,18 @@ namespace Captura
                     Application.Current.Shutdown();
                 }
             };
+#endif
         }
 
         void Application_Exit(object sender, ExitEventArgs e)
         {
-            Settings.Default.MUITheme = AppearanceSettings.selectedTheme == AppearanceSettings.LightTheme ? "light" : "dark";
+            Settings.Default.MUIThemeColor = AppearanceManager.AccentColor;
 
-            Settings.Default.MUIThemeColor = AppearanceManager.Current.AccentColor;
+            Settings.Default.MinimizeOnStart = OtherSettings.MinimizeOnStart;
 
-            Settings.Default.MinimizeOnStart = VideoSettings.MinimizeOnStart;
+            Settings.Default.IncludeCursor = OtherSettings.IncludeCursor;
 
-            Settings.Default.Save();
+            Settings.Default.Save(); 
         }
     }
 }

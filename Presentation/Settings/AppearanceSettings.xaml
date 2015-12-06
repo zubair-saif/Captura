@@ -5,6 +5,7 @@
     <Grid>
         <ScrollViewer>
             <StackPanel x:Name="Panel"
+                        Margin="10"
                         MinWidth="150">
                 <TextBlock Text="APPEARANCE" 
                            Style="{StaticResource Heading2}" 
@@ -24,46 +25,12 @@
                                        Height="40"
                                        Margin="2" >
                                 <Rectangle.Fill>
-                                    <SolidColorBrush x:Name="Brush" Color="{Binding}" />
+                                    <SolidColorBrush Color="{Binding}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
-                <Grid HorizontalAlignment="Left">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition MinWidth="120"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="1" 
-                               Text="Theme:" 
-                               VerticalAlignment="Center" 
-                               Margin="0,0,16,4" />
-                    <ComboBox Grid.Row="1" 
-                              Grid.Column="1" 
-                              ItemsSource="{Binding Themes}" 
-                              SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
-                              DisplayMemberPath="DisplayName"
-                              VerticalAlignment="Center" 
-                              Margin="0,0,0,4" />
-
-                    <TextBlock Grid.Row="2" 
-                               Text="Font size:" 
-                               VerticalAlignment="Center"
-                               Margin="0,0,16,0" />
-                    <ComboBox Grid.Row="2" 
-                              Grid.Column="1"
-                              ItemsSource="{Binding FontSizes}"
-                              SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}"
-                              VerticalAlignment="Center" />
-                </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>

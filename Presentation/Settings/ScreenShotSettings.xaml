@@ -6,6 +6,7 @@
     <Grid>
         <ScrollViewer>
             <StackPanel x:Name="Panel"
+                        Margin="10"
                         MinWidth="150">
                 <TextBlock Text="SCREENSHOT"
                            Style="{StaticResource Heading2}"
@@ -62,8 +63,7 @@
 
                         <Label Content="Width:"
                                Margin="0,3"/>
-                        <this:NumericBox x:Name="ResizeWidthBox"
-                                         Value="640"
+                        <this:NumericBox Value="{Binding _ResizeWidth, Mode=TwoWay}"
                                          Grid.Column="1"
                                          Margin="0,3"
                                          IsEnabled="{Binding _DoResize}"/>
@@ -71,8 +71,7 @@
                         <Label Content="Height:"
                                Grid.Row="1"
                                Margin="0,3"/>
-                        <this:NumericBox x:Name="ResizeHeightBox"
-                                         Value="400"
+                        <this:NumericBox Value="{Binding _ResizeHeight, Mode=TwoWay}"
                                          Grid.Row="1"
                                          Grid.Column="1"
                                          Margin="0,3"

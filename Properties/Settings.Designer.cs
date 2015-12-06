@@ -85,18 +85,6 @@ namespace Captura.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dark")]
-        public string MUITheme {
-            get {
-                return ((string)(this["MUITheme"]));
-            }
-            set {
-                this["MUITheme"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF0050EF")]
         public global::System.Windows.Media.Color MUIThemeColor {
             get {
