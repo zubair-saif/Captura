@@ -7,7 +7,7 @@
         MinWidth="400"
         Title="Captura"
         Height="500"
-        Width="600">
+        Width="400">
     <Window.Resources>
         <EllipseGeometry RadiusX="50" 
                          RadiusY="50"
@@ -22,8 +22,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
-                        <Grid Name="Panel"
-                              Background="White">
+                        <Grid Name="Panel">
                             <Label Content="{TemplateBinding Header}"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
@@ -32,7 +31,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger SourceName="Panel" Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" TargetName="Panel" Value="WhiteSmoke"/>
+                                <Setter Property="Background" TargetName="Panel" Value="#EEFFFFFF"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter TargetName="Panel" Property="Background" Value="{DynamicResource Accent}" />
@@ -44,32 +43,42 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Bottom"
-                   Background="{DynamicResource Accent}">
+    <Grid>
+        <Rectangle Height="96" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1" Opacity=".1">
+                    <GradientStop Offset="0" Color="{DynamicResource AccentColor}" />
+                    <GradientStop Offset=".3" Color="{DynamicResource AccentColor}" />
+                    <GradientStop Offset="1" Color="Transparent" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <DockPanel>
             <DockPanel DockPanel.Dock="Bottom"
+                   Background="{DynamicResource Accent}">
+                <DockPanel DockPanel.Dock="Bottom"
                        Margin="5,0,5,5">
-                <Label x:Name="TimeManager" 
+                    <Label x:Name="TimeManager" 
                        Content="00:00"
                        Foreground="White"
                        DockPanel.Dock="Right"/>
-                <Label Content="Ready"
+                    <Label Content="Ready"
                        Name="Status"
                        Foreground="White"/>
-            </DockPanel>
-            <StackPanel HorizontalAlignment="Center"
+                </DockPanel>
+                <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
                         Margin="0,10">
-                <StackPanel.Resources>
-                    <SolidColorBrush x:Key="ModernButtonBorder" Color="Transparent" />
-                    <SolidColorBrush x:Key="ModernButtonBorderHover" Color="#31FFFFFF" />
-                    <SolidColorBrush x:Key="ModernButtonBorderPressed" Color="#31FFFFFF" />
-                    <SolidColorBrush x:Key="ModernButtonBorderDisabled" Color="Transparent" />
-                    <SolidColorBrush x:Key="ModernButtonIconBackgroundPressed" Color="#77FFFFFF" />
-                    <SolidColorBrush x:Key="ModernButtonIconForegroundPressed" Color="#B7000000" />
-                </StackPanel.Resources>
-                <this:ModernButton IconHeight="30"
+                    <StackPanel.Resources>
+                        <SolidColorBrush x:Key="ModernButtonBorder" Color="Transparent" />
+                        <SolidColorBrush x:Key="ModernButtonBorderHover" Color="#31FFFFFF" />
+                        <SolidColorBrush x:Key="ModernButtonBorderPressed" Color="#31FFFFFF" />
+                        <SolidColorBrush x:Key="ModernButtonBorderDisabled" Color="Transparent" />
+                        <SolidColorBrush x:Key="ModernButtonIconBackgroundPressed" Color="#77FFFFFF" />
+                        <SolidColorBrush x:Key="ModernButtonIconForegroundPressed" Color="#B7000000" />
+                    </StackPanel.Resources>
+                    <this:ModernButton IconHeight="30"
                                   IconWidth="30"
                                   EllipseDiameter="60"
                                   ToolTip="Refresh"
@@ -77,7 +86,7 @@
                                   Margin="5,0"
                                   Foreground="White"
                                   IconData="F1 M 38,20.5833C 42.9908,20.5833 47.4912,22.6825 50.6667,26.046L 50.6667,17.4167L 55.4166,22.1667L 55.4167,34.8333L 42.75,34.8333L 38,30.0833L 46.8512,30.0833C 44.6768,27.6539 41.517,26.125 38,26.125C 31.9785,26.125 27.0037,30.6068 26.2296,36.4167L 20.6543,36.4167C 21.4543,27.5397 28.9148,20.5833 38,20.5833 Z M 38,49.875C 44.0215,49.875 48.9963,45.3932 49.7703,39.5833L 55.3457,39.5833C 54.5457,48.4603 47.0852,55.4167 38,55.4167C 33.0092,55.4167 28.5088,53.3175 25.3333,49.954L 25.3333,58.5833L 20.5833,53.8333L 20.5833,41.1667L 33.25,41.1667L 38,45.9167L 29.1487,45.9167C 31.3231,48.3461 34.483,49.875 38,49.875 Z " />
-                <this:ModernButton IconHeight="30"
+                    <this:ModernButton IconHeight="30"
                                   IconWidth="30"
                                   EllipseDiameter="60"
                                   Foreground="White"
@@ -86,7 +95,7 @@
                                   ToolTip="ScreenShot"
                                   Click="CaptureScreenShot"
                                   IconData="F1 M 30,27C 30,24.3766 32.3767,22 35,22L 41,22C 43.6234,22 46,24.3766 46,27L 50.9999,27.0001C 53.7613,27.0001 55.9999,29.2387 55.9999,32.0001L 55.9999,46.0001C 55.9999,48.7615 53.7613,51.0001 50.9999,51.0001L 25,51.0001C 22.2385,51.0001 20,48.7615 20,46.0001L 20,32.0001C 20,29.2387 22.2385,27.0001 25,27.0001L 30,27 Z M 25.5,30C 24.6716,30 24,30.8954 24,32C 24,33.1046 24.6716,34 25.5,34C 26.3284,34 27,33.1046 27,32C 27,30.8954 26.3284,30 25.5,30 Z M 38,32C 34.134,32 31,35.134 31,39C 31,42.866 34.134,46 38,46C 41.866,46 45,42.866 45,39C 45,35.134 41.866,32 38,32 Z M 38,34.5C 40.4853,34.5 42.5,36.5147 42.5,39C 42.5,41.4853 40.4853,43.5 38,43.5C 35.5147,43.5 33.5,41.4853 33.5,39C 33.5,36.5147 35.5147,34.5 38,34.5 Z "/>
-                <this:ModernButton IconHeight="30"
+                    <this:ModernButton IconHeight="30"
                                   IconWidth="30"
                                   EllipseDiameter="60"
                                   Foreground="White"
@@ -95,7 +104,7 @@
                                   x:Name="RecordButton" 
                                   Click="ToggleRecorderState"
                                   IconData="{StaticResource RecordIcon}"/>
-                <this:ModernButton IconHeight="30" 
+                    <this:ModernButton IconHeight="30" 
                                   IconWidth="30"
                                   EllipseDiameter="60"
                                   ToolTip="Pause" 
@@ -104,89 +113,90 @@
                                   x:Name="PauseButton" 
                                   Command="this:MainWindow.PauseCommand"
                                   IconData="F1 M 26.9167,23.75L 33.25,23.75L 33.25,52.25L 26.9167,52.25L 26.9167,23.75 Z M 42.75,23.75L 49.0833,23.75L 49.0833,52.25L 42.75,52.25L 42.75,23.75 Z">
-                    <this:ModernButton.LayoutTransform>
-                        <RotateTransform x:Name="RotationEffect" 
+                        <this:ModernButton.LayoutTransform>
+                            <RotateTransform x:Name="RotationEffect" 
                                          Angle="0"/>
-                    </this:ModernButton.LayoutTransform>
-                </this:ModernButton>
-            </StackPanel>
-        </DockPanel>
-        <GridSplitter Height="1"
+                        </this:ModernButton.LayoutTransform>
+                    </this:ModernButton>
+                </StackPanel>
+            </DockPanel>
+            <GridSplitter Height="1"
                       DockPanel.Dock="Bottom"/>
-        <DockPanel DockPanel.Dock="Bottom">
-            <Button Content="..."
+            <DockPanel DockPanel.Dock="Bottom">
+                <Button Content="..."
                     DockPanel.Dock="Right"
                     Command="Open" />
-            <Label Target="OutPath"
+                <Label Target="OutPath"
                    Content="Output Path: " 
                    DockPanel.Dock="Left"
                    Padding="5,0"
                    VerticalContentAlignment="Center"
                    MouseUp="OpenOutputFolder"/>
-            <TextBox x:Name="OutPath"
+                <TextBox x:Name="OutPath"
                      IsReadOnly="True" 
                      Text="{Binding Source={StaticResource Settings}, Path=Default.OutputPath, Mode=TwoWay}"/>
-        </DockPanel>
-        <GridSplitter Height="1"
+            </DockPanel>
+            <GridSplitter Height="1"
                       DockPanel.Dock="Bottom"/>
-        <TabControl>
-            <TabItem Header="Video">
-                <this:VideoSettings/>
-            </TabItem>
-            <TabItem Header="Appearance">
-                <this:AppearanceSettings/>
-            </TabItem>
-            <TabItem Header="ScreenShot">
-                <this:ScreenShotSettings/>
-            </TabItem>
-            <TabItem Header="Gif">
-                <this:GifSettings/>
-            </TabItem>
-            <TabItem Header="Audio">
-                <this:AudioSettings/>
-            </TabItem>
-            <TabItem Header="Other">
-                <this:OtherSettings/>
-            </TabItem>
-            <TabItem Header="Recent">
-                <this:Recent/>
-            </TabItem>
-            <TabItem Header="About">
-                <Grid>
-                    <ScrollViewer Margin="10">
-                        <StackPanel>
-                            <TextBlock Text="Captura"
+            <TabControl Background="Transparent">
+                <TabItem Header="Video">
+                    <this:VideoSettings/>
+                </TabItem>
+                <TabItem Header="Appearance">
+                    <this:AppearanceSettings/>
+                </TabItem>
+                <TabItem Header="ScreenShot">
+                    <this:ScreenShotSettings/>
+                </TabItem>
+                <TabItem Header="Gif">
+                    <this:GifSettings/>
+                </TabItem>
+                <TabItem Header="Audio">
+                    <this:AudioSettings/>
+                </TabItem>
+                <TabItem Header="Other">
+                    <this:OtherSettings/>
+                </TabItem>
+                <TabItem Header="Recent">
+                    <this:Recent/>
+                </TabItem>
+                <TabItem Header="About">
+                    <Grid>
+                        <ScrollViewer Margin="10">
+                            <StackPanel>
+                                <TextBlock Text="Captura"
                                        Style="{StaticResource Heading1}"
                                        Margin="0,0,0,10"/>
-                            <TextBlock TextWrapping="Wrap"
+                                <TextBlock TextWrapping="Wrap"
                                        Margin="0,0,0,10">
                                 Captura, by <Hyperlink NavigateUri="https://github.com/MathewSachin" RequestNavigate="Hyperlink_RequestNavigate">Mathew Sachin</Hyperlink>, a WPF application to Capture Screen as Picture(ScreenShots) or as Video(ScreenCasts) along with/without Mouse Cursor, Audio from Microphone or Loopback, Mouse Clicks and Keystrokes.
-                            </TextBlock>
+                                </TextBlock>
 
-                            <TextBlock>
+                                <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Screna/Captura/" RequestNavigate="Hyperlink_RequestNavigate">View On GitHub</Hyperlink>
-                            </TextBlock>
+                                </TextBlock>
 
-                            <TextBlock TextWrapping="Wrap"
+                                <TextBlock TextWrapping="Wrap"
                                        Margin="0,10">
                                 Powered by <Hyperlink NavigateUri="https://github.com/MathewSachin/ScreenWorks" RequestNavigate="Hyperlink_RequestNavigate">ScreenWorks</Hyperlink>
-                            </TextBlock>
+                                </TextBlock>
 
-                            <TextBlock Text="PLUGINS"
+                                <TextBlock Text="PLUGINS"
                                        Style="{StaticResource Heading2}"
                                        Margin="0,0,0,5"/>
-                            <TextBlock Text="Plugins extend the functionality of Captura"
+                                <TextBlock Text="Plugins extend the functionality of Captura"
                                            Margin="0,0,0,5"/>
-                            <TextBlock>
+                                <TextBlock>
                                 <Bold>DirectShowLib-2005</Bold> - Capture (Pictures Only) from WebCam
-                            </TextBlock>
-                            <TextBlock>
+                                </TextBlock>
+                                <TextBlock>
                                 <Bold>lameenc32.dll</Bold> or <Bold>lameenc64.dll</Bold> - Mp3 Audio Compression
-                            </TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+                                </TextBlock>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Grid>
 </Window>
