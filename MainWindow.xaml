@@ -18,6 +18,31 @@
                       Width="50"/>
             </RectangleGeometry.Rect>
         </RectangleGeometry>
+        <Style TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid Name="Panel"
+                              Background="White">
+                            <Label Content="{TemplateBinding Header}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Name="HeaderLabel"
+                                   Margin="10,2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="Panel" Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Panel" Value="WhiteSmoke"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Panel" Property="Background" Value="{DynamicResource Accent}" />
+                                <Setter TargetName="HeaderLabel" Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom"
@@ -150,7 +175,7 @@
                             <TextBlock Text="PLUGINS"
                                        Style="{StaticResource Heading2}"
                                        Margin="0,0,0,5"/>
-                                <TextBlock Text="Plugins extend the functionality of Captura"
+                            <TextBlock Text="Plugins extend the functionality of Captura"
                                            Margin="0,0,0,5"/>
                             <TextBlock>
                                 <Bold>DirectShowLib-2005</Bold> - Capture (Pictures Only) from WebCam
