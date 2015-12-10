@@ -173,7 +173,7 @@ namespace Captura
             ImageFormat ImgFmt = ScreenShotSettings.SelectedImageFormat;
             string Extension = ImgFmt == ImageFormat.Icon ? "ico"
                 : ImgFmt == ImageFormat.Jpeg ? "jpg"
-                : ImgFmt.ToString();
+                : ImgFmt.ToString().ToLower();
             bool SaveToClipboard = ScreenShotSettings.SaveToClipboard;
 
             if (!SaveToClipboard)
