@@ -51,8 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\#Binaries\DirectShowLib-2005.dll</HintPath>
     </Reference>
-    <Reference Include="ScreenWorks">
-      <HintPath>..\#Binaries\ScreenWorks.dll</HintPath>
+    <Reference Include="ScreenWorks, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ScreenWorks.0.3.0\lib\ScreenWorks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -279,10 +280,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="MouseKeyHook LICENSE.md" />
+    <None Include="NAudio LICENSE.md" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="SharpAvi LICENSE.md" />
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Logo.png" />
