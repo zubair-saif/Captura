@@ -47,6 +47,10 @@
     <StartupObject>Captura.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\#Binaries\DirectShowLib-2005.dll</HintPath>
+    </Reference>
     <Reference Include="ScreenWorks">
       <HintPath>..\#Binaries\ScreenWorks.dll</HintPath>
     </Reference>
@@ -114,6 +118,8 @@
       <DependentUpon>AppearanceSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\VideoSource Items\VideoSourceListItems.cs" />
+    <Compile Include="WebCam.cs" />
+    <Compile Include="WebCamProvider.cs" />
     <Page Include="Themes\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
