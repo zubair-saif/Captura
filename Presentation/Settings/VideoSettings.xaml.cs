@@ -9,13 +9,7 @@ using System.Windows.Media;
 
 namespace Captura
 {
-    public enum VideoSourceKind
-    {
-        NoVideo,
-        Window,
-        Screen,
-        WebCam
-    }
+    public enum VideoSourceKind { NoVideo, Window, Screen }
 
     public partial class VideoSettings : UserControl, INotifyPropertyChanged
     {
@@ -30,8 +24,6 @@ namespace Captura
             AvailableVideoSourceKinds.Add(new KeyValuePair<VideoSourceKind, string>(VideoSourceKind.NoVideo, "No Video"));
             AvailableVideoSourceKinds.Add(new KeyValuePair<VideoSourceKind, string>(VideoSourceKind.Window, "Window"));
 
-            if (App.IsDirectShowPresent)
-                AvailableVideoSourceKinds.Add(new KeyValuePair<VideoSourceKind, string>(VideoSourceKind.WebCam, "WebCam"));
             if (ScreenVSLI.Count > 1)
                 AvailableVideoSourceKinds.Add(new KeyValuePair<VideoSourceKind, string>(VideoSourceKind.Screen, "Screen"));
 
@@ -74,11 +66,6 @@ namespace Captura
                     foreach (var Screen in ScreenVSLI.Enumerate())
                         AvailableVideoSources.Add(Screen);
                     break;
-
-                case VideoSourceKind.WebCam:
-                    foreach (var Cam in WebCamVSLI.Enumerate())
-                        AvailableVideoSources.Add(Cam);
-                    break;
             }
 
             if (Instance != null && SelectedVideoSourceKind != VideoSourceKind.NoVideo)
@@ -118,8 +105,7 @@ namespace Captura
 
             MainWindow.Instance.RecordButton.IsEnabled = AudioAvailable || VideoAvailable;
 
-            MainWindow.Instance.ScreenShotButton.IsEnabled = VideoAvailable
-                || SelectedVideoSourceKind == VideoSourceKind.WebCam;
+            MainWindow.Instance.ScreenShotButton.IsEnabled = VideoAvailable;
         }
 
         public static ObservableCollection<KeyValuePair<string, string>> AvailableCodecs { get; private set; }

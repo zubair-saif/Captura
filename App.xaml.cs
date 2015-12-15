@@ -11,8 +11,6 @@ namespace Captura
     {
         public static bool IsLamePresent { get; private set; }
 
-        public static bool IsDirectShowPresent { get; private set; }
-
         string Dir = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
 
         void Application_Startup(object sender, StartupEventArgs e)
@@ -33,8 +31,6 @@ namespace Captura
                 SharpAviEncoder.SetLameLocation(LamePath);
                 IsLamePresent = true;
             }
-
-            IsDirectShowPresent = File.Exists(Path.Combine(Dir, "DirectShowLib-2005.dll"));
 
 #if !DEBUG
             App.Current.DispatcherUnhandledException += (s, args) =>

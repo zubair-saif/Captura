@@ -14,4 +14,3 @@ Dependencies
 --------------------------------------------------------------
 * [ScreenWorks](https://github.com/Screna/ScreenWorks) by Myself at Screna
 * _lameenc32.dll_, _lameenc64.dll_ included in source (`Need to be Licensed for Commercial Use`) [PLUGIN]
-* _DirectShowLib-2005_ [PLUGIN]

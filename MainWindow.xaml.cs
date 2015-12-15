@@ -197,9 +197,6 @@ namespace Captura
                 else BMP = new TransparentScreenshot().CaptureWindow(hWnd, IncludeCursor,
                     ScreenShotSettings.DoResize, ScreenShotSettings.ResizeWidth, ScreenShotSettings.ResizeHeight);
             }
-            else if (SelectedVideoSourceKind == VideoSourceKind.WebCam)
-                BMP = (SelectedVideoSource as WebCamVSLI).Capture();
-
             else if (SelectedVideoSourceKind == VideoSourceKind.Screen)
                 BMP = (SelectedVideoSource as ScreenVSLI).Capture(IncludeCursor);
 
@@ -322,9 +319,6 @@ namespace Captura
                                                     IncludeCursorLambda,
                                                     OtherSettings.CaptureClicks,
                                                     OtherSettings.CaptureKeystrokes);
-
-            else if (SelectedVideoSourceKind == VideoSourceKind.WebCam)
-                ImgProvider = (SelectedVideoSource as WebCamVSLI).ToWebCamProvider();
             #endregion
 
             #region VideoEncoder

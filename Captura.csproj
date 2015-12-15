@@ -47,10 +47,6 @@
     <StartupObject>Captura.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\#Binaries\DirectShowLib-2005.dll</HintPath>
-    </Reference>
     <Reference Include="ScreenWorks, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ScreenWorks.0.3.0\lib\ScreenWorks.dll</HintPath>
       <Private>True</Private>
@@ -95,7 +91,6 @@
     <Compile Include="Presentation\Settings\GifSettings.xaml.cs">
       <DependentUpon>GifSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\VideoSource Items\WebCamVSLI.cs" />
     <Compile Include="StaticRegionProvider.cs" />
     <Compile Include="FolderBrowserDialog.cs" />
     <Compile Include="Presentation\Settings\VideoSettings.xaml.cs">
@@ -118,9 +113,7 @@
     <Compile Include="Presentation\Settings\AppearanceSettings.xaml.cs">
       <DependentUpon>AppearanceSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\VideoSource Items\VideoSourceListItems.cs" />
-    <Compile Include="WebCam.cs" />
-    <Compile Include="WebCamProvider.cs" />
+    <Compile Include="Presentation\VideoSourceListItems.cs" />
     <Page Include="Themes\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
